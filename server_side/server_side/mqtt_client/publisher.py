@@ -1,0 +1,1 @@
+# can be used insead of node red ( node red will publish and subscribe)
