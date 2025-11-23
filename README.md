@@ -306,7 +306,9 @@ mosquitto_pub -h BROKER_IP -t "water/control/valve1" -m "OPEN"
 ![Overall Dashboard Flow ](docs/FLOW.png)
 
 #### Automatic Mode
+
 ![Automatic Mode ](docs/AUTO.png)
+
 #### Manual Mode
 ![Manual Mode](docs/Manual.png)
 ### Data Logging
