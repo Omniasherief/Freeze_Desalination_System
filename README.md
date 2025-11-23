@@ -64,7 +64,7 @@ According to recent research:
 
 This diagram illustrates the hardware and software components of the IoT system.
 
-![System Architecture Diagram](docs/arch.jpg)
+  ![System Architecture Diagram](docs/arch.jpg)
 
 ### Software Stack
 ```
@@ -289,9 +289,9 @@ mosquitto_pub -h BROKER_IP -t "water/control/valve1" -m "OPEN"
 ### Output on Terminal
 
 
-![Terminal Output Example 1](docs/Terminal1.png)
+  ![Terminal Output Example 1](docs/Terminal1.png)
 
-![Terminal Output Example 2](docs/Terminal2.png)
+  ![Terminal Output Example 2](docs/Terminal2.png)
 
 
 ---
@@ -306,14 +306,14 @@ mosquitto_pub -h BROKER_IP -t "water/control/valve1" -m "OPEN"
 
 - 
 #### Overall Dashboard Flow 
-![Overall Dashboard Flow ](docs/FLOW.png)
+  ![Overall Dashboard Flow ](docs/FLOW.png)
 
 #### Automatic Mode
 
-![Automatic Mode ](docs/AUTO.png)
+   ![Automatic Mode ](docs/AUTO.png)
 
 #### Manual Mode
-![Manual Mode](docs/Manual.png)
+   ![Manual Mode](docs/Manual.png)
 ### Data Logging
 All sensor data and system events are logged to CSV:
 ```csv
