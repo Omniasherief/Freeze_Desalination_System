@@ -55,7 +55,7 @@ According to recent research:
 - The FD process needs approximately 1/7th of the latent heat required by vaporization-based desalination processes, and the involvement of sub-zero temperature reduces the risk of corrosion and scaling
   
    ![idea](docs/idea.png)
-  <img src="docs/idea.png" alt="idea" style="width:120%;"/>
+  
 ---
 
 ## 🏗️ System Architecture
@@ -455,7 +455,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 10. Atlantis Press. (2021). "ESP32 Based Implementation of Water Quality and Quantity Regulating System." *Advances in Engineering Research*.
 
 11. IJRASET. (2025). "IoT Based Drinking Water Quality Monitoring with ESP32." *International Journal for Research in Applied Science & Engineering Technology*.
-
+12. https://www.kth.se/blogs/water/2019/02/cryo-desalination-a-nature-inspired-solution-to-obtain-freshwater/
 ### Technical Resources
 - [ESP32 Technical Reference](https://www.espressif.com/sites/default/files/documentation/esp32_technical_reference_manual_en.pdf)
 - [MQTT Protocol Specification](https://mqtt.org/mqtt-specification/)
