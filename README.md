@@ -55,6 +55,7 @@ According to recent research:
 - The FD process needs approximately 1/7th of the latent heat required by vaporization-based desalination processes, and the involvement of sub-zero temperature reduces the risk of corrosion and scaling
   
    ![idea](docs/idea.png)
+  <img src="docs/idea.png" alt="idea" style="width:120%;"/>
 ---
 
 ## 🏗️ System Architecture
