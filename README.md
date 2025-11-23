@@ -181,7 +181,7 @@ Physical Layer:       Freeze Desalination Process
 ### 2. ESP32 Firmware
 ```bash
 # Clone the repository
-git clone https://github.com/Omniasherief/freeze-desalination-iot.git
+git clone https://github.com/Omniasherief/Freeze_Desalination_System.git
 cd freeze-desalination-iot
 
 # Configure WiFi and MQTT
@@ -484,7 +484,7 @@ If you use this project in your research, please cite:
   title = {IoT-Enabled Automated Freeze Desalination and Cooling System},
   year = {2025},
   publisher = {GitHub},
-  url = {https://github.com/Omniasherief/freeze-desalination-iot}
+  url = {https://github.com/Omniasherief/Freeze_Desalination_System}
 }
 ```
 
