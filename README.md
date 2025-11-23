@@ -53,7 +53,8 @@ According to recent research:
 - Freeze-melting desalination operates with significantly lower energy consumption than the 3–6 kWh/m³ required by reverse osmosis (RO)
 - Progressive freezing desalination produces larger ice crystals which help reduce brine attachment, thereby improving the desalination effect with lower energy consumption
 - The FD process needs approximately 1/7th of the latent heat required by vaporization-based desalination processes, and the involvement of sub-zero temperature reduces the risk of corrosion and scaling
-![idea](docs/idea.jpg)
+  
+   ![idea](docs/idea.png)
 ---
 
 ## 🏗️ System Architecture
