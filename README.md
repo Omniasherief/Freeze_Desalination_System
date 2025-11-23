@@ -301,11 +301,13 @@ mosquitto_pub -h BROKER_IP -t "water/control/valve1" -m "OPEN"
 - **Level Indicators**: Binary state display (0/1) for LS1, LS2, LS3
 - **Mode LED**: Green (AUTO) / Red (MANUAL)
 
+- 
+#### Overall Dashboard Flow 
 ![Overall Dashboard Flow ](docs/FLOW.png)
 
-
+#### Automatic Mode
 ![Automatic Mode ](docs/AUTO.png)
-
+#### Manual Mode
 ![Manual Mode](docs/Manual.png)
 ### Data Logging
 All sensor data and system events are logged to CSV:
