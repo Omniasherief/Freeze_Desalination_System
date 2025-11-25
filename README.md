@@ -359,7 +359,7 @@ This project is grounded in current scientific literature on freeze desalination
 ## 📈 Performance Metrics
 
 ### Expected System Performance
-
+**Note:** These numbers are just expected values and will be updated later with the actual results.
 | Metric | Target | Notes |
 |--------|--------|-------|
 | **Ice Production Rate** | 5-10 kg/day | Based on cooling capacity |
