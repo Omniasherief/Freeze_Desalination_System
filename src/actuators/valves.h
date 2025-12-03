@@ -24,7 +24,7 @@ void updateValves() {
     valve1_state = false;
   }
   
-  if(valve2_state && now - valve2_timer > 3000){
+  if(valve2_state && now - valve2_timer > 5000){ // we can another ls sensor to make sure this tank is empty but we add timer instead
     valve2_state = false;
   }
 
