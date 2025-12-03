@@ -1,409 +1,840 @@
-[
-    {
-        "id": "mqtt_broker",
-        "type": "mqtt-broker",
-        "name": "ESP32 MQTT Broker",
-        "broker": "BROKER_IP",
-        "port": "1883",
-        "clientid": "",
-        "usetls": false,
-        "protocolVersion": "4"
-    },
-    {
-        "id": "LS1_in",
-        "type": "mqtt in",
-        "z": "flow1",
-        "name": "LS1",
-        "topic": "water/LS1",
-        "qos": "0",
-        "broker": "mqtt_broker",
-        "x": 120,
-        "y": 60,
-        "wires": [["LS1_text","csv_logger"]]
-    },
-    {
-        "id": "LS2_in",
-        "type": "mqtt in",
-        "z": "flow1",
-        "name": "LS2",
-        "topic": "water/LS2",
-        "qos": "0",
-        "broker": "mqtt_broker",
-        "x": 120,
-        "y": 100,
-        "wires": [["LS2_text","csv_logger"]]
-    },
-    {
-        "id": "LS3_in",
-        "type": "mqtt in",
-        "z": "flow1",
-        "name": "LS3",
-        "topic": "water/LS3",
-        "qos": "0",
-        "broker": "mqtt_broker",
-        "x": 120,
-        "y": 140,
-        "wires": [["LS3_text","csv_logger"]]
-    },
-    {
-        "id": "temperature_in",
-        "type": "mqtt in",
-        "z": "flow1",
-        "name": "Temperature",
-        "topic": "water/temperature",
-        "qos": "0",
-        "broker": "mqtt_broker",
-        "x": 140,
-        "y": 180,
-        "wires": [["temperature_gauge","csv_logger"]]
-    },
-    {
-        "id": "TDS_in",
-        "type": "mqtt in",
-        "z": "flow1",
-        "name": "TDS",
-        "topic": "water/tds",
-        "qos": "0",
-        "broker": "mqtt_broker",
-        "x": 140,
-        "y": 220,
-        "wires": [["TDS_gauge","csv_logger"]]
-    },
-    {
-        "id": "mode_in",
-        "type": "mqtt in",
-        "z": "flow1",
-        "name": "System Mode",
-        "topic": "water/system/mode",
-        "qos": "0",
-        "broker": "mqtt_broker",
-        "x": 140,
-        "y": 260,
-        "wires": [["mode_led","csv_logger","manual_mode_flag"]]
-    },
-    {
-        "id": "LS1_text",
-        "type": "ui_text",
-        "z": "flow1",
-        "group": "dashboard_group",
-        "order": 1,
-        "width": 2,
-        "height": 1,
-        "name": "LS1 Status",
-        "label": "LS1",
-        "format": "{{msg.payload}}",
-        "x": 350,
-        "y": 60,
-        "wires": []
-    },
-    {
-        "id": "LS2_text",
-        "type": "ui_text",
-        "z": "flow1",
-        "group": "dashboard_group",
-        "order": 2,
-        "width": 2,
-        "height": 1,
-        "name": "LS2 Status",
-        "label": "LS2",
-        "format": "{{msg.payload}}",
-        "x": 350,
-        "y": 100,
-        "wires": []
-    },
-    {
-        "id": "LS3_text",
-        "type": "ui_text",
-        "z": "flow1",
-        "group": "dashboard_group",
-        "order": 3,
-        "width": 2,
-        "height": 1,
-        "name": "LS3 Status",
-        "label": "LS3",
-        "format": "{{msg.payload}}",
-        "x": 350,
-        "y": 140,
-        "wires": []
-    },
-    {
-        "id": "temperature_gauge",
-        "type": "ui_gauge",
-        "z": "flow1",
-        "group": "dashboard_group",
-        "order": 4,
-        "width": 3,
-        "height": 2,
-        "name": "Water Temp",
-        "label": "°C",
-        "format": "{{msg.payload}}",
-        "min": 0,
-        "max": 100,
-        "x": 350,
-        "y": 180,
-        "wires": []
-    },
-    {
-        "id": "TDS_gauge",
-        "type": "ui_gauge",
-        "z": "flow1",
-        "group": "dashboard_group",
-        "order": 5,
-        "width": 3,
-        "height": 2,
-        "name": "TDS Value",
-        "label": "ppm",
-        "format": "{{msg.payload}}",
-        "min": 0,
-        "max": 2000,
-        "x": 350,
-        "y": 220,
-        "wires": []
-    },
-    {
-        "id": "mode_led",
-        "type": "ui_led",
-        "z": "flow1",
-        "group": "dashboard_group",
-        "order": 6,
-        "width": 2,
-        "height": 1,
-        "label": "Mode AUTO/MANUAL",
-        "colorForTrue": "green",
-        "colorForFalse": "red",
-        "x": 350,
-        "y": 260,
-        "wires": []
-    },
-   
-    {
-        "id": "manual_mode_flag",
-        "type": "change",
-        "z": "flow1",
-        "name": "Set manual flag",
-        "rules": [
-            {"t":"set","p":"manual","pt":"flow","to":"payload","tot":"msg"}
-        ],
-        "x": 550,
-        "y": 260,
-        "wires":[]
-    },
-    {
-        "id": "pump1_on",
-        "type": "ui_button",
-        "z": "flow1",
-        "name": "Pump1 ON",
-        "group": "dashboard_group",
-        "order": 7,
-        "width": 1,
-        "height": 1,
-        "label": "Pump1 ON",
-        "topic": "water/control/pump1",
-        "payload": "ON",
-        "payloadType": "str",
-        "x": 150,
-        "y": 320,
-        "wires": [["manual_mode_check"]]
-    },
-    {
-        "id": "pump1_off",
-        "type": "ui_button",
-        "z": "flow1",
-        "name": "Pump1 OFF",
-        "group": "dashboard_group",
-        "order": 8,
-        "width": 1,
-        "height": 1,
-        "label": "Pump1 OFF",
-        "topic": "water/control/pump1",
-        "payload": "OFF",
-        "payloadType": "str",
-        "x": 150,
-        "y": 360,
-        "wires": [["manual_mode_check"]]
-    },
-    {
-        "id": "manual_mode_check",
-        "type": "switch",
-        "z": "flow1",
-        "name": "Manual mode only",
-        "property": "flow.manual",
-        "propertyType": "flow",
-        "rules": [
-            {"t": "eq","v": "MANUAL","vt": "str"},
-            {"t": "else"}
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 2,
-        "x": 350,
-        "y": 340,
-        "wires": [["pump1_out"],[]]
-    },
-    {
-        "id": "pump1_out",
-        "type": "mqtt out",
-        "z": "flow1",
-        "name": "Pump1 MQTT Out",
-        "topic": "water/control/pump1",
-        "qos": "",
-        "retain": "",
-        "broker": "mqtt_broker",
-        "x": 550,
-        "y": 340,
-        "wires": []
-    },
-    {
-    "id": "pump2_on",
-    "type": "ui_button",
-    "z": "flow1",
-    "name": "Pump2 ON",
-    "group": "dashboard_group",
-    "order": 7,
-    "width": 2,
-    "height": 1,
-    "label": "Pump2 ON",
-    "bgcolor": "#00ff00",
-    "topic": "water/control/pump2",
-    "payload": "ON",
-    "payloadType": "str",
-    "x": 150,
-    "y": 380,
-    "wires": [["mqtt_out"]]
-},
-{
-    "id": "pump2_off",
-    "type": "ui_button",
-    "z": "flow1",
-    "name": "Pump2 OFF",
-    "group": "dashboard_group",
-    "order": 8,
-    "width": 2,
-    "height": 1,
-    "label": "Pump2 OFF",
-    "bgcolor": "#ff0000",
-    "topic": "water/control/pump2",
-    "payload": "OFF",
-    "payloadType": "str",
-    "x": 150,
-    "y": 420,
-    "wires": [["mqtt_out"]]
-},
-{
-    "id": "valve1_open",
-    "type": "ui_button",
-    "z": "flow1",
-    "name": "Valve1 OPEN",
-    "group": "dashboard_group",
-    "order": 9,
-    "width": 2,
-    "height": 1,
-    "label": "Valve1 OPEN",
-    "bgcolor": "#00ccff",
-    "topic": "water/control/valve1",
-    "payload": "OPEN",
-    "payloadType": "str",
-    "x": 150,
-    "y": 460,
-    "wires": [["mqtt_out"]]
-},
-{
-    "id": "valve1_close",
-    "type": "ui_button",
-    "z": "flow1",
-    "name": "Valve1 CLOSE",
-    "group": "dashboard_group",
-    "order": 10,
-    "width": 2,
-    "height": 1,
-    "label": "Valve1 CLOSE",
-    "bgcolor": "#999999",
-    "topic": "water/control/valve1",
-    "payload": "CLOSE",
-    "payloadType": "str",
-    "x": 150,
-    "y": 500,
-    "wires": [["mqtt_out"]]
-},
-{
-    "id": "valve2_open",
-    "type": "ui_button",
-    "z": "flow1",
-    "name": "Valve2 OPEN",
-    "group": "dashboard_group",
-    "order": 11,
-    "width": 2,
-    "height": 1,
-    "label": "Valve2 OPEN",
-    "bgcolor": "#00ccff",
-    "topic": "water/control/valve2",
-    "payload": "OPEN",
-    "payloadType": "str",
-    "x": 150,
-    "y": 540,
-    "wires": [["mqtt_out"]]
-},
-{
-    "id": "valve2_close",
-    "type": "ui_button",
-    "z": "flow1",
-    "name": "Valve2 CLOSE",
-    "group": "dashboard_group",
-    "order": 12,
-    "width": 2,
-    "height": 1,
-    "label": "Valve2 CLOSE",
-    "bgcolor": "#999999",
-    "topic": "water/control/valve2",
-    "payload": "CLOSE",
-    "payloadType": "str",
-    "x": 150,
-    "y": 580,
-    "wires": [["mqtt_out"]]
-},
-
-
-    {
-    "id": "csv_logger",
-    "type": "function",
-    "z": "flow1",
-    "name": "CSV Logger",
-    "func": "let timestamp = new Date().toISOString();\nmsg.payload = `${timestamp},${msg.topic},${msg.payload}\\n`;\nreturn msg;",
-    "outputs": 1,
-    "noerr": 0,
-    "initialize": "",
-    "finalize": "",
-    "x": 650,
-    "y": 180,
-    "wires": [["csv_file"]]
-    },
-    {
-    "id": "csv_file",
-    "type": "file",
-    "z": "flow1",
-    "name": "Save CSV",
-    "filename": "/home/omnia/Desalination_Cooling_System/server_side/data/water_data.csv",
-    "appendNewline": false,
-    "createDir": true,
-    "overwriteFile": "false",
-    "encoding": "none",
-    "x": 860,
-    "y": 180,
-    "wires": []
-    }
-    ,
-    {
-    "id": "mqtt_out",
-    "type": "mqtt out",
-    "z": "flow1",
-    "name": "Main MQTT Out",
-    "topic": "",
-    "qos": "",
-    "retain": "",
-    "broker": "mqtt_broker",
-    "x": 550,
-    "y": 640,
-    "wires": []
-    }
-
-]
+	
+0	
+id	"d8109a2d7ebd3d97"
+type	"tab"
+label	"Flow 1"
+disabled	false
+info	""
+env	[]
+1	
+id	"mqtt_broker"
+type	"mqtt-broker"
+name	"ESP32 MQTT Broker"
+broker	"127.0.0.1"
+port	"1883"
+clientid	""
+autoConnect	true
+usetls	false
+protocolVersion	"4"
+keepalive	15
+cleansession	true
+autoUnsubscribe	true
+birthTopic	""
+birthQos	"0"
+birthPayload	""
+birthMsg	{}
+closeTopic	""
+closePayload	""
+closeMsg	{}
+willTopic	""
+willQos	"0"
+willPayload	""
+willMsg	{}
+userProps	""
+sessionExpiry	""
+2	
+id	"b7f8ab4ef3145d8d"
+type	"ui-theme"
+name	"Default Theme"
+colors	
+surface	"#ffffff"
+primary	"#0094CE"
+bgPage	"#eeeeee"
+groupBg	"#ffffff"
+groupOutline	"#cccccc"
+sizes	
+density	"default"
+pagePadding	"12px"
+groupGap	"12px"
+groupBorderRadius	"4px"
+widgetGap	"12px"
+3	
+id	"23c7d23359ced5bd"
+type	"ui-page"
+name	"Page 1"
+ui	""
+path	"/page1"
+icon	"home"
+layout	"grid"
+theme	"b7f8ab4ef3145d8d"
+breakpoints	
+0	
+name	"Default"
+px	0
+cols	3
+1	
+name	"Tablet"
+px	576
+cols	6
+2	
+name	"Small Desktop"
+px	768
+cols	9
+3	
+name	"Desktop"
+px	1024
+cols	12
+order	1
+className	""
+visible	"true"
+disabled	"false"
+4	
+id	"5d5f17c62c631193"
+type	"ui-group"
+name	"Group 1"
+page	"23c7d23359ced5bd"
+width	6
+height	1
+order	1
+showTitle	true
+className	""
+visible	true
+disabled	false
+groupType	"default"
+5	
+id	"7afb053115a2bdf8"
+type	"ui-page"
+name	"Page 2"
+ui	""
+path	"/page2"
+icon	"home"
+layout	"grid"
+theme	"b7f8ab4ef3145d8d"
+breakpoints	
+0	
+name	"Default"
+px	0
+cols	3
+1	
+name	"Tablet"
+px	576
+cols	6
+2	
+name	"Small Desktop"
+px	768
+cols	9
+3	
+name	"Desktop"
+px	1024
+cols	12
+order	2
+className	""
+visible	true
+disabled	false
+6	
+id	"f7d287616ea4aa2b"
+type	"ui_base"
+theme	
+name	"theme-dark"
+lightTheme	
+default	"#0094CE"
+baseColor	"#0094CE"
+baseFont	"Arial,Arial,Helvetica,sans-serif"
+edited	true
+reset	false
+darkTheme	
+default	"#097479"
+baseColor	"#097479"
+baseFont	"-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+edited	true
+reset	false
+customTheme	
+name	"Untitled Theme 1"
+default	"#4B7930"
+baseColor	"#097479"
+baseFont	"-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+reset	false
+themeState	
+base-color	
+default	"#097479"
+value	"#097479"
+edited	true
+page-titlebar-backgroundColor	
+value	"#097479"
+edited	false
+page-backgroundColor	
+value	"#111111"
+edited	false
+page-sidebar-backgroundColor	
+value	"#333333"
+edited	false
+group-textColor	
+value	"#0eb8c0"
+edited	false
+group-borderColor	
+value	"#555555"
+edited	false
+group-backgroundColor	
+value	"#333333"
+edited	false
+widget-textColor	
+value	"#eeeeee"
+edited	false
+widget-backgroundColor	
+value	"#097479"
+edited	false
+widget-borderColor	
+value	"#333333"
+edited	false
+base-font	
+value	"-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+angularTheme	
+primary	"indigo"
+accents	"blue"
+warn	"red"
+background	"grey"
+palette	"light"
+site	
+name	"Node-RED Dashboard"
+hideToolbar	"false"
+allowSwipe	"false"
+lockMenu	"false"
+allowTempTheme	"true"
+dateFormat	"DD/MM/YYYY"
+sizes	
+sx	265
+sy	110
+gx	6
+gy	6
+cx	10
+cy	10
+px	0
+py	0
+7	
+id	"7d05e05b417dc678"
+type	"ui_group"
+name	"Group 1"
+tab	""
+order	1
+disp	true
+width	6
+collapse	false
+className	""
+8	
+id	"1a4ef4b2f1f55338"
+type	"ui_spacer"
+z	"d8109a2d7ebd3d97"
+name	"spacer"
+group	"7d05e05b417dc678"
+order	1
+width	"1"
+height	"1"
+9	
+id	"dashboard_tab"
+type	"ui_tab"
+name	"Dashboard"
+icon	"dashboard"
+order	1
+disabled	false
+10	
+id	"dashboard_group"
+type	"ui_group"
+name	"Control system"
+tab	"dashboard_tab"
+order	1
+disp	true
+width	"6"
+collapse	false
+className	""
+11	
+id	"LS1_in"
+type	"mqtt in"
+z	"d8109a2d7ebd3d97"
+name	"LS1"
+topic	"water/LS1"
+qos	"0"
+broker	"mqtt_broker"
+inputs	0
+x	1470
+y	1100
+wires	
+0	
+0	"LS1_text"
+1	"csv_logger"
+12	
+id	"LS2_in"
+type	"mqtt in"
+z	"d8109a2d7ebd3d97"
+name	"LS2"
+topic	"water/LS2"
+qos	"0"
+broker	"mqtt_broker"
+inputs	0
+x	1470
+y	1140
+wires	
+0	
+0	"LS2_text"
+1	"csv_logger"
+13	
+id	"LS3_in"
+type	"mqtt in"
+z	"d8109a2d7ebd3d97"
+name	"LS3"
+topic	"water/LS3"
+qos	"0"
+broker	"mqtt_broker"
+inputs	0
+x	1470
+y	1180
+wires	
+0	
+0	"LS3_text"
+1	"csv_logger"
+14	
+id	"temperature_in"
+type	"mqtt in"
+z	"d8109a2d7ebd3d97"
+name	"Temperature"
+topic	"water/temperature"
+qos	"0"
+broker	"mqtt_broker"
+inputs	0
+x	1490
+y	1220
+wires	
+0	
+0	"temperature_gauge"
+1	"csv_logger"
+15	
+id	"TDS_in"
+type	"mqtt in"
+z	"d8109a2d7ebd3d97"
+name	"TDS"
+topic	"water/tds"
+qos	"0"
+broker	"mqtt_broker"
+inputs	0
+x	1490
+y	1260
+wires	
+0	
+0	"TDS_gauge"
+1	"csv_logger"
+16	
+id	"mode_in"
+type	"mqtt in"
+z	"d8109a2d7ebd3d97"
+name	"System Mode"
+topic	"water/system/mode"
+qos	"0"
+datatype	"auto-detect"
+broker	"mqtt_broker"
+nl	false
+rap	false
+inputs	0
+x	1310
+y	1320
+wires	
+0	
+0	"701cf5070827fd6e"
+1	"csv_logger"
+2	"manual_mode_flag"
+3	"3aea5606fc1530ce"
+17	
+id	"LS1_text"
+type	"ui_text"
+z	"d8109a2d7ebd3d97"
+group	"dashboard_group"
+order	1
+width	2
+height	1
+name	"LS1 Status"
+label	"LS1"
+format	"{{msg.payload}}"
+layout	"row-center"
+className	""
+style	true
+font	""
+fontSize	"25"
+color	"#ffffff"
+x	1700
+y	1100
+wires	[]
+18	
+id	"LS2_text"
+type	"ui_text"
+z	"d8109a2d7ebd3d97"
+group	"dashboard_group"
+order	2
+width	2
+height	1
+name	"LS2 Status"
+label	"LS2"
+format	"{{msg.payload}}"
+layout	"row-center"
+className	""
+style	true
+font	"Arial,Arial,Helvetica,sans-serif"
+fontSize	"25"
+color	"#ffffff"
+x	1700
+y	1140
+wires	[]
+19	
+id	"LS3_text"
+type	"ui_text"
+z	"d8109a2d7ebd3d97"
+group	"dashboard_group"
+order	3
+width	2
+height	1
+name	"LS3 Status"
+label	"LS3"
+format	"{{msg.payload}}"
+layout	"row-center"
+className	""
+style	true
+font	""
+fontSize	"25"
+color	"#ffffff"
+x	1700
+y	1180
+wires	[]
+20	
+id	"temperature_gauge"
+type	"ui_gauge"
+z	"d8109a2d7ebd3d97"
+name	"Water Temp"
+group	"dashboard_group"
+order	4
+width	3
+height	2
+gtype	"gage"
+title	""
+label	"°C"
+format	"{{msg.payload}}"
+min	-55
+max	125
+colors	
+0	"#00b500"
+1	"#e6e600"
+2	"#ca3838"
+seg1	""
+seg2	""
+diff	false
+className	""
+x	1700
+y	1220
+wires	[]
+21	
+id	"TDS_gauge"
+type	"ui_gauge"
+z	"d8109a2d7ebd3d97"
+name	"TDS Value"
+group	"dashboard_group"
+order	5
+width	3
+height	2
+gtype	"gage"
+title	""
+label	"ppm"
+format	"{{msg.payload}}"
+min	0
+max	1000
+colors	
+0	"#00b500"
+1	"#e6e600"
+2	"#ca3838"
+seg1	""
+seg2	""
+diff	false
+className	""
+x	1700
+y	1260
+wires	[]
+22	
+id	"701cf5070827fd6e"
+type	"ui_led"
+z	"d8109a2d7ebd3d97"
+order	6
+group	"dashboard_group"
+width	2
+height	"2"
+label	"Mode AUTO/MANUAL"
+colorForValue	
+0	
+color	"#ff0000"
+value	"AUTO"
+valueType	"str"
+1	
+color	"#008000"
+value	"MANUAL"
+valueType	"str"
+allowColorForValueInMessage	false
+shape	"circle"
+showGlow	true
+name	""
+x	1710
+y	1320
+wires	[]
+23	
+id	"manual_mode_flag"
+type	"change"
+z	"d8109a2d7ebd3d97"
+name	"Set manual flag"
+rules	
+0	
+t	"set"
+p	"MANUAL"
+pt	"flow"
+to	"payload"
+tot	"msg"
+x	1880
+y	1300
+wires	
+0	
+0	"8b6a78c0d9621686"
+24	
+id	"pump1_on"
+type	"ui_button"
+z	"d8109a2d7ebd3d97"
+name	"Pump1 ON"
+group	"dashboard_group"
+order	7
+width	"1"
+height	1
+passthru	false
+label	"Pump1 ON"
+tooltip	""
+color	""
+bgcolor	"green"
+className	""
+icon	""
+payload	"ON"
+payloadType	"str"
+topic	"water/control/pump1"
+topicType	"str"
+x	1500
+y	1360
+wires	
+0	
+0	"manual_mode_check"
+25	
+id	"pump1_off"
+type	"ui_button"
+z	"d8109a2d7ebd3d97"
+name	"Pump1 OFF"
+group	"dashboard_group"
+order	8
+width	"1"
+height	1
+passthru	false
+label	"Pump1 OFF"
+tooltip	""
+color	""
+bgcolor	"red"
+className	""
+icon	""
+payload	"OFF"
+payloadType	"str"
+topic	"water/control/pump1"
+topicType	"str"
+x	1500
+y	1400
+wires	
+0	
+0	"manual_mode_check"
+26	
+id	"pump2_on"
+type	"ui_button"
+z	"d8109a2d7ebd3d97"
+name	"Pump2 ON"
+group	"dashboard_group"
+order	9
+width	"1"
+height	1
+passthru	false
+label	"Pump2 ON"
+tooltip	""
+color	""
+bgcolor	"green"
+className	""
+icon	""
+payload	"ON"
+payloadType	"str"
+topic	"water/control/pump2"
+topicType	"str"
+x	1500
+y	1440
+wires	
+0	
+0	"manual_mode_check"
+27	
+id	"pump2_off"
+type	"ui_button"
+z	"d8109a2d7ebd3d97"
+name	"Pump2 OFF"
+group	"dashboard_group"
+order	10
+width	"1"
+height	1
+passthru	false
+label	"Pump2 OFF"
+tooltip	""
+color	""
+bgcolor	"red"
+className	""
+icon	""
+payload	"OFF"
+payloadType	"str"
+topic	"water/control/pump2"
+topicType	"str"
+x	1500
+y	1480
+wires	
+0	
+0	"manual_mode_check"
+28	
+id	"valve1_open"
+type	"ui_button"
+z	"d8109a2d7ebd3d97"
+name	"Valve1 OPEN"
+group	"dashboard_group"
+order	11
+width	"1"
+height	1
+passthru	false
+label	"Valve1 OPEN"
+tooltip	""
+color	""
+bgcolor	"green"
+className	""
+icon	""
+payload	"OPEN"
+payloadType	"str"
+topic	"water/control/valve1"
+topicType	"str"
+x	1500
+y	1520
+wires	
+0	
+0	"manual_mode_check"
+29	
+id	"valve1_close"
+type	"ui_button"
+z	"d8109a2d7ebd3d97"
+name	"Valve1 CLOSE"
+group	"dashboard_group"
+order	12
+width	"1"
+height	1
+passthru	false
+label	"Valve1 CLOSE"
+tooltip	""
+color	""
+bgcolor	"red"
+className	""
+icon	""
+payload	"CLOSE"
+payloadType	"str"
+topic	"water/control/valve1"
+topicType	"str"
+x	1500
+y	1560
+wires	
+0	
+0	"manual_mode_check"
+30	
+id	"valve2_open"
+type	"ui_button"
+z	"d8109a2d7ebd3d97"
+name	"Valve2 OPEN"
+group	"dashboard_group"
+order	13
+width	"1"
+height	1
+passthru	false
+label	"Valve2 OPEN"
+tooltip	""
+color	""
+bgcolor	"green"
+className	""
+icon	""
+payload	"OPEN"
+payloadType	"str"
+topic	"water/control/valve2"
+topicType	"str"
+x	1500
+y	1600
+wires	
+0	
+0	"manual_mode_check"
+31	
+id	"valve2_close"
+type	"ui_button"
+z	"d8109a2d7ebd3d97"
+name	"Valve2 CLOSE"
+group	"dashboard_group"
+order	14
+width	"1"
+height	1
+passthru	false
+label	"Valve2 CLOSE"
+tooltip	""
+color	""
+bgcolor	"red"
+className	""
+icon	""
+payload	"CLOSE"
+payloadType	"str"
+topic	"water/control/valve2"
+topicType	"str"
+x	1500
+y	1640
+wires	
+0	
+0	"manual_mode_check"
+32	
+id	"mode_control_switch"
+type	"ui_switch"
+z	"d8109a2d7ebd3d97"
+name	"System Mode Switch"
+label	"Mode (OFF=AUTO, ON=MANUAL)"
+tooltip	""
+group	"dashboard_group"
+order	15
+width	3
+height	"2"
+passthru	true
+decouple	"false"
+topic	"water/control/mode"
+topicType	"str"
+onvalue	"MANUAL"
+onvalueType	"str"
+onicon	""
+oncolor	""
+offvalue	"AUTO"
+offvalueType	"str"
+officon	""
+offcolor	""
+animate	true
+className	""
+x	1500
+y	1700
+wires	
+0	
+0	"mqtt_out"
+33	
+id	"manual_mode_check"
+type	"switch"
+z	"d8109a2d7ebd3d97"
+name	"Manual mode only"
+property	"MANUAL"
+propertyType	"flow"
+rules	
+0	
+t	"eq"
+v	"MANUAL"
+vt	"str"
+checkall	"true"
+repair	false
+outputs	1
+x	1750
+y	1500
+wires	
+0	
+0	"mqtt_out"
+1	"25d131b06aede42a"
+34	
+id	"csv_logger"
+type	"function"
+z	"d8109a2d7ebd3d97"
+name	"CSV Logger"
+func	"let timestamp = new Date().toISOString();\nmsg.payload = `${timestamp},${msg.topic},${msg.payload}\\n`;\nreturn msg;"
+outputs	1
+noerr	0
+initialize	""
+finalize	""
+x	2000
+y	1220
+wires	
+0	
+0	"csv_file"
+35	
+id	"csv_file"
+type	"file"
+z	"d8109a2d7ebd3d97"
+name	"Save CSV"
+filename	"/home/omnia/Desalination_Cooling_System/server_side/data/water_data.csv"
+appendNewline	false
+createDir	true
+overwriteFile	"false"
+encoding	"none"
+x	2210
+y	1220
+wires	
+0	[]
+36	
+id	"mqtt_out"
+type	"mqtt out"
+z	"d8109a2d7ebd3d97"
+name	"Main MQTT Out"
+topic	""
+qos	""
+retain	""
+respTopic	""
+contentType	""
+userProps	""
+correl	""
+expiry	""
+broker	"mqtt_broker"
+x	1880
+y	1700
+wires	[]
+37	
+id	"3aea5606fc1530ce"
+type	"debug"
+z	"d8109a2d7ebd3d97"
+name	"debug 1"
+active	false
+tosidebar	true
+console	false
+tostatus	false
+complete	"payload"
+targetType	"msg"
+statusVal	""
+statusType	"auto"
+x	1520
+y	1040
+wires	[]
+38	
+id	"25d131b06aede42a"
+type	"debug"
+z	"d8109a2d7ebd3d97"
+name	"debug 2"
+active	false
+tosidebar	true
+console	false
+tostatus	false
+complete	"payload"
+targetType	"msg"
+statusVal	""
+statusType	"auto"
+x	1940
+y	1480
+wires	[]
+39	
+id	"8b6a78c0d9621686"
+type	"debug"
+z	"d8109a2d7ebd3d97"
+name	"debug 3"
+active	false
+tosidebar	true
+console	false
+tostatus	false
+complete	"payload"
+targetType	"msg"
+statusVal	""
+statusType	"auto"
+x	1920
+y	1400
+wires	[]
+40	
+id	"ecfb5ac9e0bc987d"
+type	"global-config"
+env	[]
+modules	
+@flowfuse/node-red-dashboard	"1.29.0"
+node-red-dashboard	"3.6.6"
+node-red-contrib-ui-led	"0.4.11"
