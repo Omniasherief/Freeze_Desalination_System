@@ -464,31 +464,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-## 👥 Authors & Acknowledgments
 
-**Project Developer**: [omnia Sherief]  
-**Institution**: [Manoura university]  
-**Contact**: [omniasheriefahmed@gmail.com]
-
-### Acknowledgments
-- ESP32 community for excellent documentation
-- Node-RED community for dashboard support
-- Research community for open-access publications on freeze desalination
-- All contributors to open-source libraries used in this project
-
-### Citations
-If you use this project in your research, please cite:
-```bibtex
-@misc{freeze_desalination_iot_2025,
-  author = {omnia_sherief},
-  title = {IoT-Enabled Automated Freeze Desalination and Cooling System},
-  year = {2025},
-  publisher = {GitHub},
-  url = {https://github.com/Omniasherief/Freeze_Desalination_System}
-}
-```
-
----
 
 ## 📞 Support
 
