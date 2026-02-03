@@ -299,8 +299,8 @@ mosquitto_pub -h BROKER_IP -t "water/control/valve1" -m "OPEN"
 ## 📊 Data Visualization
 
 ### Dashboard Metrics
-- **Temperature Gauge**: Range 0-100°C, critical zone: -5°C to 5°C
-- **TDS Gauge**: Range 0-2000 ppm, WHO limit: 400 ppm indicator
+- **Temperature Gauge**: Range 0-125°C, critical zone: -5°C to 5°C
+- **TDS Gauge**: Range 0-1000 ppm, WHO limit: 400 ppm indicator
 - **Level Indicators**: Binary state display (0/1) for LS1, LS2, LS3
 - **Mode LED**: Green (AUTO) / Red (MANUAL)
 
